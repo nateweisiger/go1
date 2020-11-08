@@ -1,4 +1,19 @@
-# go1
+# Run the app
+
+### Clone GitHub repo 
+`git@github.com:nateweisiger/go1.git`
+
+### Install Dependencies
+`composer update`
+
+### Start php web server
+`cd public/`
+
+`php -S localhost:8888`
+
+
+
+# The Task
 
 GO1 Tech Test
 Build a slim application to retrieve, filter and display training events based on an input location, keyword(s) and a date.
