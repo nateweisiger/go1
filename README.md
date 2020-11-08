@@ -6,6 +6,11 @@
 ### Install Dependencies
 `composer update`
 
+### Start Elastic Search
+`cd /path/to/elasticsearch-7.9.3/bin`
+
+`./elasticsearch`
+
 ### Start php web server
 `cd public/`
 
