@@ -29,8 +29,26 @@ $app->get('/api/events', function (Request $request, Response $response, $args) 
  * Events API - GET by ID
  */
 $app->get('/api/events/{id}', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Events API - GET by ID");
-    return $response;
+
+    // TODO - Validate input
+    // TODO - Return 404 if event not found
+
+    // Get event by ID
+    $esClient = ClientBuilder::create()->build();
+    $params = [
+        'index' => 'events',
+        'id'    => $args['id']
+    ];
+    $esResponse = $esClient->get($params);
+
+    // Format and return results
+    $payload['ID'] = $esResponse['_id'];
+    $payload = array_merge($payload, $esResponse['_source']);
+
+    $response->getBody()->write(json_encode($payload));
+    return $response
+        ->withHeader('Content-Type', 'application/json');
+
 });
 
 /**
