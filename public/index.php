@@ -21,8 +21,58 @@ $app->get('/', function (Request $request, Response $response, $args) {
  * Events API - GET All
  */
 $app->get('/api/events', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Events API - GET");
-    return $response;
+
+    // TODO - Validate search input
+    // TODO - Add date and location filtering
+
+    // Parse filters
+    $apiFilters = $request->getQueryParams();
+    $esShouldFilter = [];
+
+    // Filter by keyword (Tile or description)
+    // NOTE - Description not currently in source data - Added here anyway.
+    if (isset($apiFilters['keywords'])) {
+        $esShouldFilter[] =
+            [
+                'match' => [
+                    'Title' => $apiFilters['keywords']
+                ]
+            ];
+        $esShouldFilter[] =
+            [
+                'match' => [
+                    'Description' => $apiFilters['keywords']
+                ]
+            ];
+    }
+
+    $params = [
+        'index' => 'events',
+        'body'  => [
+            'query' => [
+                'bool' => [
+                    'should' => $esShouldFilter,
+                ]
+            ],
+        ],
+    ];
+
+    $esClient = ClientBuilder::create()->build();
+    $esResponse = $esClient->search($params);
+
+    // Format a return results
+    $payload = [];
+    foreach ($esResponse['hits']['hits'] as $esEvent) {
+        $event = [];
+        $event['ID'] = $esEvent['_id'];
+        $event = array_merge($event, $esEvent['_source']);
+        $payload[] = $event;
+    }
+
+    $response->getBody()->write(json_encode($payload));
+    return $response
+        ->withHeader('Content-Type', 'application/json');
+
 });
 
 /**
