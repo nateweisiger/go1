@@ -16,6 +16,9 @@
 
 `php -S localhost:8888`
 
+### Load seed data
+`http://localhost:8888/load_data`
+
 
 
 # The Task
