@@ -3,6 +3,8 @@ $(document).ready(function() {
 
     // Call events API, and display results in Datatables
     $('#events').DataTable( {
+        "searching": false,
+        "lengthChange": false,
         "ajax": {
             "url": "/api/events",
             "dataSrc": "",

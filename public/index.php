@@ -13,7 +13,7 @@ $app = AppFactory::create();
 /**
  * Events UI
  */
-$app->get('/', function (Request $request, Response $response, $args) {
+$app->map(['GET', 'POST'], '/', function (Request $request, Response $response, $args) {
     $renderer = new PhpRenderer('views');
     return $renderer->render($response, "event_list.php", $args);
 });
