@@ -3,6 +3,7 @@ use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 use Elasticsearch\ClientBuilder;
+use Slim\Views\PhpRenderer;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -13,8 +14,8 @@ $app = AppFactory::create();
  * Events UI
  */
 $app->get('/', function (Request $request, Response $response, $args) {
-    $response->getBody()->write("Events UI");
-    return $response;
+    $renderer = new PhpRenderer('views');
+    return $renderer->render($response, "event_list.php", $args);
 });
 
 /**

@@ -1,10 +1,10 @@
-#Use:
+# Use:
 - Slim PHP Framework (Required as per instructions)
 - Composer package manager
 - MySQL (If geo searching, postgres) or elastic search - Decide after looking at data.
 - Bootstrap / Jquery for UI
 
-#Tasks:
+# Tasks:
 - Set up Slim app with any needed dependencies
 - Write data import script
 - Write API GET endpoint (all)
@@ -19,7 +19,7 @@
   - 3 search boxes - Keyword, location and date
   - Add details modal for each event
 
-##If time remains:
+## If time remains:
 - Add map UI for events
 - Package into Docker
 - Possibly add simple API authentication?

@@ -19,6 +19,13 @@
 ### Load seed data
 `http://localhost:8888/load_data`
 
+### The UI can be found here
+`http://localhost:8888/`
+
+### The API end points can be found here
+`http://localhost:8888/api/events`
+
+`http://localhost:8888/api/events/{event_id}`
 
 
 # The Task
